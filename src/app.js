@@ -285,7 +285,9 @@ class HeizolOptimizer {
                             now.setDate(1);
                             if (date <= now) return '';
                             
-                            const prevPrices = dataService.getPreviousYearPrices(date.getMonth(), 2);
+                            // Pass the year of the clicked future month as reference
+                            const clickedYear = date.getFullYear();
+                            const prevPrices = dataService.getPreviousYearPrices(date.getMonth(), 2, clickedYear);
                             if (!prevPrices.length) return '';
                             
                             const lines = ['─────────────', '📊 Vorjahresvergleich:'];
@@ -363,12 +365,38 @@ class HeizolOptimizer {
     }
     
     /**
-     * Get demo events for fallback
+     * Get demo events for fallback (when RSS feeds fail)
      */
     getDemoEvents() {
         return [
-            { title: 'Heizölpreise: Entwicklung im Februar', link: '#', date: '2026-02-10', source: 'Demo', type: 'global' },
-            { title: 'Energiepreise 2026: Prognose', link: '#', date: '2026-02-05', source: 'Demo', type: 'global' }
+            { 
+                title: 'Heizölpreise: Aktuelle Entwicklung', 
+                link: 'https://wirtschaft.orf.at/stories/energie/', 
+                date: '2026-02-14', 
+                source: 'ORF Wirtschaft', 
+                type: 'global' 
+            },
+            { 
+                title: 'Energiesparen: Tipps für Haushalte', 
+                link: 'https://help.orf.at/stories/energie-sparen/', 
+                date: '2026-02-10', 
+                source: 'ORF Help', 
+                type: 'global' 
+            },
+            { 
+                title: 'Tirol: Regionale Energiethemen', 
+                link: 'https://tirol.orf.at/', 
+                date: '2026-02-08', 
+                source: 'ORF Tirol', 
+                type: 'regional' 
+            },
+            { 
+                title: 'Heizkostenvergleich Österreich', 
+                link: 'https://www.wissenswertes.at/heizoel-preise-oesterreich/', 
+                date: '2026-02-05', 
+                source: 'Wissenswertes.at', 
+                type: 'global' 
+            }
         ];
     }
     
@@ -398,10 +426,25 @@ class HeizolOptimizer {
      * Refresh all data
      */
     async refreshData() {
+        const statusDiv = document.getElementById('tankStatus');
+        this.showStatus(statusDiv, '🔄 Aktualisiere...', '');
+        
         await dataService.refresh();
         forecastEngine.generateForecast();
         this.updateChart();
         this.updateRecommendation();
+        
+        // Show timestamp
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('de-AT', { hour: '2-digit', minute: '2-digit' });
+        const dateStr = now.toLocaleDateString('de-AT', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        
+        const updateDiv = document.getElementById('lastUpdate');
+        if (updateDiv) {
+            updateDiv.textContent = `✅ Zuletzt aktualisiert: ${dateStr} um ${timeStr}`;
+        }
+        
+        this.showStatus(statusDiv, '✓ Daten aktualisiert!', 'success');
     }
 }
 

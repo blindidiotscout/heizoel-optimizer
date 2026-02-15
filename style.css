@@ -423,6 +423,14 @@ footer a {
     font-size: 0.8rem;
 }
 
+/* Update Timestamp */
+.update-timestamp {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 8px;
+    padding: 6px 0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .container {

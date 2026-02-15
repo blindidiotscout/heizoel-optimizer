@@ -110,13 +110,17 @@ class DataService {
     
     /**
      * Get previous year prices for a month
+     * @param {number} month - Month index (0-11)
+     * @param {number} years - Number of previous years to check
+     * @param {number} relativeToYear - Optional: use this year as reference instead of current year
      */
-    getPreviousYearPrices(month, years = 2) {
-        const currentYear = new Date().getFullYear();
+    getPreviousYearPrices(month, years = 2, relativeToYear = null) {
+        // Use the provided reference year, or fall back to current year
+        const refYear = relativeToYear || new Date().getFullYear();
         const result = [];
         
         for (let i = 1; i <= years; i++) {
-            const year = currentYear - i;
+            const year = refYear - i;
             const price = this.findHistoricalPrice(month, year);
             if (price) {
                 result.push({ year, price: price.price });
