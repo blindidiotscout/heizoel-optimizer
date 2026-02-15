@@ -1,0 +1,457 @@
+/* Heizöl-Optimizer Styles */
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --success: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Cards */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.card h2 {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--border);
+    font-size: 1.4rem;
+}
+
+/* Tank Section */
+.tank-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.tank-form {
+    flex: 1;
+    min-width: 280px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.status-message {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.status-message.success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-message.error {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* Tank Visual */
+.tank-visual {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tank-bar {
+    width: 80px;
+    height: 200px;
+    background: #e2e8f0;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    border: 3px solid #cbd5e1;
+}
+
+.tank-fill {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, var(--success), #34d399);
+    border-radius: 0 0 5px 5px;
+    transition: height 0.5s ease-out;
+    height: 0%;
+}
+
+.tank-fill.low {
+    background: linear-gradient(to top, var(--danger), #f87171);
+}
+
+.tank-fill.medium {
+    background: linear-gradient(to top, var(--warning), #fbbf24);
+}
+
+#tankPercent {
+    margin-top: 12px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+/* Recommendation Section */
+.recommendation-section {
+    background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    border-color: #a7f3d0;
+}
+
+.recommendation-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--success);
+}
+
+.recommendation-item.urgent {
+    border-left-color: var(--danger);
+    background: linear-gradient(90deg, #fef2f2 0%, white 100%);
+}
+
+.recommendation-item.wait {
+    border-left-color: var(--warning);
+    background: linear-gradient(90deg, #fffbeb 0%, white 100%);
+}
+
+.recommendation-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.recommendation-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.no-data {
+    color: var(--text-light);
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Chart Section */
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}
+
+.legend-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.legend-item .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.legend-item.historical .dot { background: #3b82f6; }
+.legend-item.expected .dot { background: #8b5cf6; }
+.legend-item.best .dot { background: #10b981; }
+.legend-item.worst .dot { background: #ef4444; }
+.legend-item.buy-zone .dot { background: #fbbf24; }
+
+/* Events Section */
+#eventsContainer {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.event-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+}
+
+.event-item:hover {
+    background: #f8fafc;
+}
+
+.event-item:last-child {
+    border-bottom: none;
+}
+
+.event-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.event-content h4 {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.event-content h4 a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.event-content h4 a:hover {
+    text-decoration: underline;
+}
+
+.event-content p {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.event-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: var(--text-light);
+}
+
+.event-tag {
+    padding: 2px 8px;
+    background: #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.7rem;
+}
+
+.event-tag.global { background: #dbeafe; color: #1e40af; }
+.event-tag.regional { background: #fef3c7; color: #92400e; }
+
+.loading {
+    text-align: center;
+    padding: 30px;
+    color: var(--text-light);
+}
+
+.event-info {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+}
+
+/* Info Section */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.info-item {
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.info-item h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.info-item p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.info-item ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.info-item li {
+    padding: 4px 0;
+    padding-left: 20px;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.info-item li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    color: var(--text-light);
+    font-size: 0.85rem;
+}
+
+footer a {
+    color: var(--primary);
+}
+
+.disclaimer {
+    margin-top: 12px;
+    padding: 12px;
+    background: #fef3c7;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    .card {
+        padding: 16px;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+
+    .legend-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .tank-section {
+        flex-direction: column;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    .card h2 {
+        font-size: 1.2rem;
+    }
+
+    .recommendation-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+}
