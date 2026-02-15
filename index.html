@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heizöl-Optimizer | Tirol</title>
+    <meta name="description" content="Heizöl-Optimizer - Heizölkosten-Minimierung durch Preisprognose und Kaufempfehlungen">
+    <title>Heizöl-Optimizer v2.0 | Österreich</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛢️</text></svg>">
+    
+    <!-- Chart.js with version pinning -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
@@ -12,7 +16,7 @@
     <div class="container">
         <header>
             <h1>🛢️ Heizöl-Optimizer</h1>
-            <p class="subtitle">Region Tirol, Österreich</p>
+            <p class="subtitle">Region Österreich | v2.0</p>
         </header>
 
         <!-- Tank-Input Section -->
@@ -27,7 +31,10 @@
                     <label for="currentLevel">Aktueller Füllstand (Liter)</label>
                     <input type="number" id="currentLevel" placeholder="z.B. 1200" min="0" max="50000">
                 </div>
-                <button id="saveTank" class="btn btn-primary">💾 Speichern</button>
+                <div class="form-actions">
+                    <button id="saveTank" class="btn btn-primary">💾 Speichern</button>
+                    <button id="refreshData" class="btn btn-secondary">🔄 Aktualisieren</button>
+                </div>
                 <div id="tankStatus" class="status-message"></div>
             </div>
             <div class="tank-visual">
@@ -42,7 +49,7 @@
         <section class="recommendation-section card" id="recommendationCard">
             <h2>💡 Kaufempfehlung</h2>
             <div id="recommendationContent">
-                <p class="no-data">Bitte Tank-Daten eingeben für personalisierte Empfehlung.</p>
+                <p class="no-data">Daten werden geladen...</p>
             </div>
         </section>
 
@@ -57,7 +64,6 @@
                 <span class="legend-item expected"><span class="dot"></span> Erwarteter Preis</span>
                 <span class="legend-item best"><span class="dot"></span> Best-Case</span>
                 <span class="legend-item worst"><span class="dot"></span> Worst-Case</span>
-                <span class="legend-item buy-zone"><span class="dot"></span> Jetzt-Kaufen-Zone</span>
             </div>
         </section>
 
@@ -68,7 +74,7 @@
                 <div class="loading">Lade Events...</div>
             </div>
             <div class="event-info">
-                <small>📡 Quellen: ORF Tirol, Wirtschafts-Nachrichten</small>
+                <small>📡 Quellen: ORF Wirtschaft, ORF Tirol</small>
             </div>
         </section>
 
@@ -78,29 +84,30 @@
             <div class="info-grid">
                 <div class="info-item">
                     <h3>📉 Beste Kaufzeit</h3>
-                    <p>Historisch gesehen sind die Preise im <strong>Sommer</strong> und frühen Herbst am niedrigsten.</p>
+                    <p>Historisch gesehen sind die Preise im <strong>Sommer</strong> (Mai-August) am niedrigsten.</p>
                 </div>
                 <div class="info-item">
-                    <h3>⚠️ Unsicherheit</h3>
-                    <p>Prognosen weiter in die Zukunft sind weniger verlässlich. Die Spanne zwischen Best-Case und Worst-Case wird größer.</p>
+                    <h3>⚠️ 30%-Strategie</h3>
+                    <p>Bei kritischem Füllstand (<20%) und hohem Preis: Nur 30% des Tanks nachfüllen, Rest später zu besseren Preisen.</p>
                 </div>
                 <div class="info-item">
                     <h3>💰 Spartipps</h3>
                     <ul>
-                        <li>Bestellen Sie frühzeitig (2-3 Wochen Lead-Time)</li>
-                        <li>Vergleichen Sie mindestens 3 Anbieter</li>
-                        <li>Beachten Sie Saisonalität</li>
+                        <li>Mindestens 3 Anbieter vergleichen</li>
+                        <li>2-3 Wochen Vorlauf einplanen</li>
+                        <li>Saisonalität nutzen</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <footer>
-            <p> Heizöl-Optimizer MVP v1.0 | <a href="https://github.com" target="_blank">GitHub</a></p>
-            <p class="disclaimer">⚠️ Haftungsausschluss: Alle Prognosen basieren auf historischen Daten und Modellen. Keine Garantie für zukünftige Preise. Dies ist ein Beratungstool, keine Finanzberatung.</p>
+            <p>🛢️ Heizöl-Optimizer v2.0 | <a href="https://github.com/blindidiotscout/heizoel-optimizer" target="_blank">GitHub</a></p>
+            <p class="disclaimer">⚠️ Haftungsausschluss: Alle Prognosen basieren auf historischen Daten. Keine Garantie für zukünftige Preise. Dies ist ein Beratungstool.</p>
         </footer>
     </div>
 
-    <script src="app.js"></script>
+    <!-- ES Module entry point -->
+    <script type="module" src="src/app.js"></script>
 </body>
 </html>
