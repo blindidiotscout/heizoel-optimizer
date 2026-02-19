@@ -131,46 +131,6 @@ class DataService {
     }
     
     /**
-     * Fetch RSS feed events
-     */
-    async fetchEvents() {
-        const events = [];
-        
-        for (const feed of CONFIG.rssFeeds) {
-            try {
-                const response = await fetch(CONFIG.corsProxy + encodeURIComponent(feed.url));
-                const data = await response.json();
-                
-                const parser = new DOMParser();
-                const xml = parser.parseFromString(data.contents, 'text/xml');
-                const items = xml.querySelectorAll('item');
-                
-                items.forEach((item, index) => {
-                    if (index >= 5) return; // Limit to 5 per feed
-                    
-                    const title = item.querySelector('title')?.textContent;
-                    const link = item.querySelector('link')?.textContent;
-                    const pubDate = item.querySelector('pubDate')?.textContent;
-                    
-                    if (title) {
-                        events.push({
-                            title,
-                            link: link || '#',
-                            date: pubDate ? new Date(pubDate).toISOString().split('T')[0] : '',
-                            source: feed.name,
-                            type: feed.type
-                        });
-                    }
-                });
-            } catch (e) {
-                console.warn(`Feed ${feed.name} konnte nicht geladen werden`);
-            }
-        }
-        
-        return events;
-    }
-    
-    /**
      * Check if cache is valid
      */
     isCacheValid() {

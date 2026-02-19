@@ -38,9 +38,6 @@ class HeizolOptimizer {
         // Create chart
         this.createChart();
         
-        // Load events
-        this.loadEvents();
-        
         // Update recommendation
         this.updateRecommendation();
         
@@ -341,81 +338,6 @@ class HeizolOptimizer {
             <div class="recommendation-item ${item.urgency}">
                 <span class="recommendation-label">${item.icon} ${item.label}</span>
                 <span class="recommendation-value">${item.value}</span>
-            </div>
-        `).join('');
-        
-        container.innerHTML = html;
-    }
-    
-    /**
-     * Load and display events
-     */
-    async loadEvents() {
-        const container = document.getElementById('eventsContainer');
-        
-        // Try to load real events
-        let events = await dataService.fetchEvents();
-        
-        // Fallback to demo events
-        if (!events.length) {
-            events = this.getDemoEvents();
-        }
-        
-        this.renderEvents(events);
-    }
-    
-    /**
-     * Get demo events for fallback (when RSS feeds fail)
-     */
-    getDemoEvents() {
-        return [
-            { 
-                title: 'Heizölpreise: Aktuelle Entwicklung', 
-                link: 'https://wirtschaft.orf.at/stories/energie/', 
-                date: '2026-02-14', 
-                source: 'ORF Wirtschaft', 
-                type: 'global' 
-            },
-            { 
-                title: 'Energiesparen: Tipps für Haushalte', 
-                link: 'https://help.orf.at/stories/energie-sparen/', 
-                date: '2026-02-10', 
-                source: 'ORF Help', 
-                type: 'global' 
-            },
-            { 
-                title: 'Tirol: Regionale Energiethemen', 
-                link: 'https://tirol.orf.at/', 
-                date: '2026-02-08', 
-                source: 'ORF Tirol', 
-                type: 'regional' 
-            },
-            { 
-                title: 'Heizkostenvergleich Österreich', 
-                link: 'https://www.wissenswertes.at/heizoel-preise-oesterreich/', 
-                date: '2026-02-05', 
-                source: 'Wissenswertes.at', 
-                type: 'global' 
-            }
-        ];
-    }
-    
-    /**
-     * Render events in container
-     */
-    renderEvents(events) {
-        const container = document.getElementById('eventsContainer');
-        
-        const html = events.map(event => `
-            <div class="event-item">
-                <span class="event-icon">${event.type === 'global' ? '🌍' : '🏔️'}</span>
-                <div class="event-content">
-                    <h4><a href="${event.link}" target="_blank">${event.title}</a></h4>
-                    <div class="event-meta">
-                        <span>${event.date}</span>
-                        <span>${event.source}</span>
-                    </div>
-                </div>
             </div>
         `).join('');
         

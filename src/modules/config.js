@@ -17,13 +17,6 @@ export const CONFIG = {
         refreshIntervalMs: 60 * 60 * 1000, // 1 hour
     },
     
-    // RSS-Feeds für Events (via CORS Proxy)
-    corsProxy: 'https://api.allorigins.win/get?url=',
-    rssFeeds: [
-        { name: 'ORF Wirtschaft', url: 'https://rss.orf.at/wirtschaft.xml', type: 'global' },
-        { name: 'ORF Tirol', url: 'https://rss.orf.at/news/Tirol.xml', type: 'regional' }
-    ],
-    
     // Prognose-Einstellungen
     forecast: {
         months: 12,
