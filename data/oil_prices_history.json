@@ -1,0 +1,46 @@
+{
+  "history": [
+    {
+      "date": "2026-02-19T21:22:17.840052",
+      "prices": [
+        {
+          "code": "BRENT_CRUDE_USD",
+          "name": "Brent Crude Oil",
+          "price": 71.83,
+          "currency": "USD",
+          "updated_at": "2026-02-19T20:18:03Z",
+          "change_24h": 2.37,
+          "source": "OilPriceAPI"
+        },
+        {
+          "code": "WTI_USD",
+          "name": "WTI Crude Oil",
+          "price": 66.54,
+          "currency": "USD",
+          "updated_at": "2026-02-19T20:21:13Z",
+          "change_24h": 2.18,
+          "source": "OilPriceAPI"
+        },
+        {
+          "code": "HEATING_OIL_USD",
+          "name": "Heating Oil",
+          "price": 2.5,
+          "currency": "USD",
+          "updated_at": "2026-02-19T00:00:36Z",
+          "change_24h": 0.0,
+          "source": "OilPriceAPI"
+        },
+        {
+          "code": "DIESEL_USD",
+          "name": "Diesel",
+          "price": 2.13,
+          "currency": "USD",
+          "updated_at": "2026-02-11T21:00:22Z",
+          "change_24h": null,
+          "source": "OilPriceAPI"
+        }
+      ]
+    }
+  ],
+  "alerts": []
+}
